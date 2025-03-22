@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,7 +27,7 @@
             background: white;
             padding: 25px;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
         }
 
@@ -66,27 +67,6 @@
             background-color: #2980b9;
         }
 
-        .loading {
-            display: none;
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        .spinner {
-            border: 6px solid #f3f3f3;
-            border-top: 6px solid #3498db;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
         .info {
             background-color: #e8f4f8;
             padding: 15px;
@@ -95,104 +75,177 @@
             border-left: 4px solid #3498db;
         }
 
-        .error {
-            background-color: #f8e8e8;
+        .success-message {
+            background-color: #e8f8ea;
             padding: 15px;
             border-radius: 5px;
             margin-top: 20px;
-            border-left: 4px solid #e74c3c;
+            border-left: 4px solid #2ecc71;
             display: none;
         }
-        
-        .iframe-container {
-            position: relative;
-            width: 100%;
-            height: 600px;
-            margin-top: 20px;
-            display: none;
+
+        .links-container {
+            margin-top: 30px;
         }
-        
-        iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
+
+        .link-card {
+            background: white;
+            border: 1px solid #ddd;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            transition: transform 0.2s;
+        }
+
+        .link-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .link-icon {
+            font-size: 24px;
+            margin-right: 15px;
+            color: #3498db;
+        }
+
+        .link-info {
+            flex: 1;
+        }
+
+        .link-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .link-description {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .features-list {
+            margin-top: 30px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .feature-icon {
+            color: #3498db;
+            margin-right: 10px;
+            font-size: 20px;
+        }
+
+        .feature-text {
+            flex: 1;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h1>SEO Optimizer App Launcher</h1>
-        
+
+        <p>This launcher helps you quickly access the Writer SEO Optimizer app with your API key.</p>
+
         <div class="form-group">
             <label for="apiKey">Writer API Key:</label>
             <input type="text" id="apiKey" placeholder="Enter your Writer API Key">
         </div>
-        
+
         <button id="launchBtn">Launch SEO Optimizer</button>
-        
-        <div id="loading" class="loading">
-            <div class="spinner"></div>
-            <p>Loading SEO Optimizer...</p>
+
+        <div id="successMessage" class="success-message">
+            <p>Your API key has been saved to this browser. You can now launch Writer directly.</p>
         </div>
-        
-        <div id="errorMsg" class="error">
-            An error occurred. Please check your API key and try again.
-        </div>
-        
+
         <div class="info">
-            <p><strong>Note:</strong> This is a launcher for the SEO Optimizer App. You need a valid Writer API Key to use this application. Your API key is stored only in your browser and is not sent to any server except the Writer API.</p>
+            <p><strong>Note:</strong> Your API key is stored only in your browser's local storage and is only used to
+                authenticate with the Writer API. This launcher does not store or transmit your key to any other
+                services.</p>
+        </div>
+
+        <div class="features-list">
+            <h3>SEO Optimizer Features:</h3>
+
+            <div class="feature-item">
+                <span class="feature-icon">✓</span>
+                <div class="feature-text">
+                    <strong>Keyword Optimization</strong> - Optimize your content for target keywords and improve your
+                    search engine rankings.
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <span class="feature-icon">✓</span>
+                <div class="feature-text">
+                    <strong>Content Analysis</strong> - Get detailed analysis of your content's SEO performance and
+                    readability.
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <span class="feature-icon">✓</span>
+                <div class="feature-text">
+                    <strong>Recommendations</strong> - Receive actionable recommendations to improve your content's
+                    search visibility.
+                </div>
+            </div>
         </div>
     </div>
-    
-    <div id="appContainer" class="iframe-container">
-        <iframe id="appFrame" src="about:blank" allow="clipboard-read; clipboard-write"></iframe>
+
+    <div class="links-container">
+        <h3>Useful Resources:</h3>
+
+        <a href="https://docs.writer.com/" target="_blank" class="link-card">
+            <div class="link-icon">📚</div>
+            <div class="link-info">
+                <div class="link-title">Writer Documentation</div>
+                <div class="link-description">Official documentation for using Writer's platform and API</div>
+            </div>
+        </a>
+
+        <a href="https://app.writer.com/settings/api-keys" target="_blank" class="link-card">
+            <div class="link-icon">🔑</div>
+            <div class="link-info">
+                <div class="link-title">Manage API Keys</div>
+                <div class="link-description">Create or manage your Writer API keys</div>
+            </div>
+        </a>
     </div>
-    
+
     <script>
-        document.getElementById('launchBtn').addEventListener('click', function() {
+        document.getElementById('launchBtn').addEventListener('click', function () {
             const apiKey = document.getElementById('apiKey').value.trim();
-            
+
             if (!apiKey) {
                 alert('Please enter your Writer API Key.');
                 return;
             }
-            
+
             // Store API key in local storage for convenience
             localStorage.setItem('writerApiKey', apiKey);
-            
-            // Show loading spinner
-            document.getElementById('loading').style.display = 'block';
-            document.getElementById('errorMsg').style.display = 'none';
-            
-            // In a real implementation, we would validate the API key
-            // For this demo, we'll simulate loading and then show a success message
-            setTimeout(() => {
-                document.getElementById('loading').style.display = 'none';
-                
-                // Load the app in the iframe
-                // In a real implementation, this would be your Writer app URL
-                const appFrame = document.getElementById('appFrame');
-                
-                // Here we would typically load your actual app, but for now we'll show a placeholder
-                appFrame.src = `https://app.writer.com/organization/workspace?apiKey=${encodeURIComponent(apiKey)}`;
-                
-                // Show the iframe container
-                document.getElementById('appContainer').style.display = 'block';
-            }, 2000);
+
+            // Show success message
+            document.getElementById('successMessage').style.display = 'block';
+
+            // Open Writer in a new tab with the API key
+            window.open(`https://app.writer.com/?apiKey=${encodeURIComponent(apiKey)}`, '_blank');
         });
-        
+
         // Auto-fill API key from local storage if available
-        window.addEventListener('DOMContentLoaded', function() {
+        window.addEventListener('DOMContentLoaded', function () {
             const savedApiKey = localStorage.getItem('writerApiKey');
             if (savedApiKey) {
                 document.getElementById('apiKey').value = savedApiKey;
+                document.getElementById('successMessage').style.display = 'block';
             }
         });
     </script>
 </body>
+
 </html>
