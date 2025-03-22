@@ -234,7 +234,8 @@
             document.getElementById('successMessage').style.display = 'block';
 
             // Open Writer in a new tab with the API key
-            window.open(`https://app.writer.com/?apiKey=${encodeURIComponent(apiKey)}`, '_blank');
+            // Try a different URL format that may work better with Writer's security settings
+            window.open('https://app.writer.com/organization/', '_blank');
         });
 
         // Auto-fill API key from local storage if available
