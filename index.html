@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO Optimizer App Launcher</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f7f9;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .container {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .spinner {
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid #3498db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .info {
+            background-color: #e8f4f8;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            border-left: 4px solid #3498db;
+        }
+
+        .error {
+            background-color: #f8e8e8;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            border-left: 4px solid #e74c3c;
+            display: none;
+        }
+        
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SEO Optimizer App Launcher</h1>
+        
+        <div class="form-group">
+            <label for="apiKey">Writer API Key:</label>
+            <input type="text" id="apiKey" placeholder="Enter your Writer API Key">
+        </div>
+        
+        <button id="launchBtn">Launch SEO Optimizer</button>
+        
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p>Loading SEO Optimizer...</p>
+        </div>
+        
+        <div id="errorMsg" class="error">
+            An error occurred. Please check your API key and try again.
+        </div>
+        
+        <div class="info">
+            <p><strong>Note:</strong> This is a launcher for the SEO Optimizer App. You need a valid Writer API Key to use this application. Your API key is stored only in your browser and is not sent to any server except the Writer API.</p>
+        </div>
+    </div>
+    
+    <div id="appContainer" class="iframe-container">
+        <iframe id="appFrame" src="about:blank" allow="clipboard-read; clipboard-write"></iframe>
+    </div>
+    
+    <script>
+        document.getElementById('launchBtn').addEventListener('click', function() {
+            const apiKey = document.getElementById('apiKey').value.trim();
+            
+            if (!apiKey) {
+                alert('Please enter your Writer API Key.');
+                return;
+            }
+            
+            // Store API key in local storage for convenience
+            localStorage.setItem('writerApiKey', apiKey);
+            
+            // Show loading spinner
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('errorMsg').style.display = 'none';
+            
+            // In a real implementation, we would validate the API key
+            // For this demo, we'll simulate loading and then show a success message
+            setTimeout(() => {
+                document.getElementById('loading').style.display = 'none';
+                
+                // Load the app in the iframe
+                // In a real implementation, this would be your Writer app URL
+                const appFrame = document.getElementById('appFrame');
+                
+                // Here we would typically load your actual app, but for now we'll show a placeholder
+                appFrame.src = `https://app.writer.com/organization/workspace?apiKey=${encodeURIComponent(apiKey)}`;
+                
+                // Show the iframe container
+                document.getElementById('appContainer').style.display = 'block';
+            }, 2000);
+        });
+        
+        // Auto-fill API key from local storage if available
+        window.addEventListener('DOMContentLoaded', function() {
+            const savedApiKey = localStorage.getItem('writerApiKey');
+            if (savedApiKey) {
+                document.getElementById('apiKey').value = savedApiKey;
+            }
+        });
+    </script>
+</body>
+</html>
